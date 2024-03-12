@@ -1,0 +1,35 @@
+<div>
+  <button class="icon-home" (click)="goBack()">
+    <span class="icon-home"></span>
+    Back
+  </button>
+</div>
+<div *ngIf="this.movie | async as movie">
+  <h1>{{movie.title}}</h1>
+  <div class="poster-summary">
+  <img class="poster" [src]="movie.poster" alt="Poster of movie"/>
+  <div class="summary">Summary : {{movie.summary}}</div>
+  </div>
+  <table class="horizontal">
+    <caption>Details</caption>
+    <thead>
+    <tr>
+      <th>Box Office</th>
+      <th>Budget</th>
+      <th>Duration</th>
+      <th>Producers</th>
+      <th>Cinematographers</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{movie.boxOffice | millionDollars}}</td>
+      <td>{{movie.budget | millionDollars}}</td>
+      <td>{{movie.duration | duration}}</td>
+      <td>{{movie.producers}}</td>
+      <td>{{movie.cinematographers}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
