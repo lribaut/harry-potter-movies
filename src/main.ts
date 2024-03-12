@@ -1,11 +1,9 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { http, HttpResponse } from 'msw';
+import { setupWorker } from 'msw/browser';
 import { AppComponent } from './app/app.component';
-import {setupWorker} from 'msw/browser';
-import {http, HttpResponse} from 'msw';
+import { appConfig } from './app/app.config';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
 
 
 const handlers = [
@@ -221,5 +219,9 @@ const handlers = [
   }),
 ];
 export const worker = setupWorker(...handlers);
-worker.start();
+worker.start()
+.then(() => bootstrapApplication(AppComponent, appConfig))
+.catch((err) => console.error(err));
+
+
 
