@@ -4,6 +4,7 @@ import {catchError, EMPTY, map, Observable} from "rxjs";
 import {Movie} from "../../page/movies-page/movies/movie";
 import {MovieApi} from "../models/movie-api";
 import {MovieDetails} from "../../page/movie-details-page/movie-details";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,8 @@ export class MovieService {
   realaseDateFilter$: Signal<string> = computed<string>(() => this.#realaseDateFilter$());
 
   private readonly http: HttpClient = inject(HttpClient);
+
+  private readonly router: Router = inject(Router)
 
   /**
    * Methode to search all Harry Potter Movies
@@ -37,7 +40,7 @@ export class MovieService {
         ),
         catchError(() => {
           alert("Movies not found");
-          throw new Error("Movies not found");
+          console.error("Movies not found");
           return EMPTY;
         })
       );
@@ -86,7 +89,8 @@ export class MovieService {
       ),
       catchError(() => {
         alert("Movie not found");
-        throw new Error("Movie not found");
+        console.error("Movie not found");
+        this.router.navigate(['/movies']);
         return EMPTY;
       })
     )

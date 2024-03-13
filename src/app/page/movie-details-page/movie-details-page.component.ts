@@ -47,12 +47,6 @@ export class MovieDetailsPageComponent {
       }
       return this.service.getMovieById(id!);
     })
-    , catchError(() => {
-      alert("Missing id parameter");
-      console.error("Missing id parameter");
-      this.goBack();
-      return EMPTY;
-    })
   )
 
   /**
