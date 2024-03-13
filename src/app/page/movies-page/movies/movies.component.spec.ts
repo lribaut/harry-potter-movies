@@ -40,8 +40,6 @@ describe('MoviesComponent', () => {
       const id : string = '1';
       component.goToMovieDetail(id);
       expect(routerSpy.navigate).toHaveBeenCalledWith(['/movies',id]);
-      expect(movieServiceSpy.updateReleaseYearFilter).toHaveBeenCalledWith(undefined);
-      expect(movieServiceSpy.updateTitleFilter).toHaveBeenCalledWith('');
     });
   })
 });

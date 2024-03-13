@@ -47,15 +47,6 @@ export class MoviesComponent {
    * @param idMovie the movie id we want display detail page
    */
   goToMovieDetail(idMovie: string) : void {
-    this.resetFilters();
     this.router.navigate(['/movies',idMovie]);
-  }
-
-  /**
-   * Method to reset filters
-   */
-  private resetFilters(): void {
-    this.service.updateTitleFilter('');
-    this.service.updateReleaseYearFilter(undefined);
   }
 }

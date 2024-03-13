@@ -22,12 +22,12 @@ export class ResearchMoviesComponent implements OnInit, OnDestroy {
   /**
    * FormControl for title filter
    */
-  titleControl : FormControl = new FormControl('');
+  titleControl : FormControl = new FormControl(this.service.titleFilter$());
 
   /**
    * FormControl for release year filter
    */
-  releaseYearControl : FormControl = new FormControl('');
+  releaseYearControl : FormControl = new FormControl(this.service.realaseDateFilter$());
 
   /**
    * Subscription for detecting changes on title and release year filter

@@ -4,12 +4,12 @@ import {MovieDetailsPageComponent} from "./page/movie-details-page/movie-details
 
 export const routes: Routes = [
   {
-    path: 'movies/:id',
-    loadComponent: () => import('./page/movie-details-page/movie-details-page.component').then(c => c.MovieDetailsPageComponent)
-  },
-  {
     path: 'movies',
     loadComponent : () => import('./page/movies-page/movies-page.component').then(c => c.MoviesPageComponent)
+  },
+  {
+    path: 'movies/:id',
+    loadComponent: () => import('./page/movie-details-page/movie-details-page.component').then(c => c.MovieDetailsPageComponent)
   },
   {
     path: '',

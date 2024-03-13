@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {catchError, mergeMap, Observable} from "rxjs";
+import {catchError, EMPTY, mergeMap, Observable} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {MovieDetails} from "./movie-details";
@@ -41,11 +41,17 @@ export class MovieDetailsPageComponent {
    */
   movie: Observable<MovieDetails> = this.route.paramMap.pipe(
     mergeMap((paramMap: ParamMap) => {
-      const id : string | null = paramMap.get('id');
+      const id: string | null = paramMap.get('id');
       if (!id) {
-        throw new Error('Missing id parameter');
+        throw new Error('No id provided');
       }
-      return this.service.getMovieById(id);
+      return this.service.getMovieById(id!);
+    })
+    , catchError(() => {
+      alert("Missing id parameter");
+      console.error("Missing id parameter");
+      this.goBack();
+      return EMPTY;
     })
   )
 

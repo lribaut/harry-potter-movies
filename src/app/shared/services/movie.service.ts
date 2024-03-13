@@ -1,6 +1,6 @@
 import {computed, inject, Injectable, Signal, signal, WritableSignal} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {catchError, EMPTY, map, Observable} from "rxjs";
 import {Movie} from "../../page/movies-page/movies/movie";
 import {MovieApi} from "../models/movie-api";
 import {MovieDetails} from "../../page/movie-details-page/movie-details";
@@ -34,7 +34,12 @@ export class MovieService {
               }
             )
           )
-        )
+        ),
+        catchError(() => {
+          alert("Movies not found");
+          throw new Error("Movies not found");
+          return EMPTY;
+        })
       );
   }
 
@@ -78,7 +83,12 @@ export class MovieService {
           producers: movieApi.producers,
           summary: movieApi.summary
         })
-      )
+      ),
+      catchError(() => {
+        alert("Movie not found");
+        throw new Error("Movie not found");
+        return EMPTY;
+      })
     )
       ;
   }

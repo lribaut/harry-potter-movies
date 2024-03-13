@@ -43,6 +43,33 @@ describe('MovieDetailsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should return error', async () => {
+    activatedRouteMock = {paramMap: of({
+        get : () => null,
+        has : () => true,
+        getAll : () =>  [],
+        keys :  []
+      })};
+    await TestBed.configureTestingModule({
+      imports: [MovieDetailsPageComponent],
+      providers: [
+        {provide: Router, useValue: routerSpy},
+        {provide: ActivatedRoute, useValue: activatedRouteMock},
+        {provide: MovieService, useValue: movieServiceSpy}
+      ]
+    })
+      .compileComponents();
+
+
+    fixture = TestBed.createComponent(MovieDetailsPageComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    component.movie.subscribe(
+      (movieDetails) => {
+        expect(movieServiceSpy.getMovieById).toHaveBeenCalledWith('1');
+      }
+    )
+  })
   it('should call movieService when id was defined ', () => {
     const expectedMovieDetails : MovieDetails = {
       id: '1',

@@ -11,7 +11,7 @@
           <div class="duration">Duration: {{ movie.duration | duration }}</div>
         </div>
       </h3>
-      <button class="details" [attr.id]="movie.id" (click)="goToMovieDetail(movie.id)">Details</button>
+      <button class="details" [id]="movie.id" (click)="goToMovieDetail(movie.id)">Details</button>
     </div>
   </li>
   </ng-container>
