@@ -7,16 +7,21 @@ import {Movie} from "../../page/movies-page/movies/movie";
 import {MovieDetails} from "../../page/movie-details-page/movie-details";
 import {computed, signal, WritableSignal} from "@angular/core";
 import {MovieService} from "./movie.service";
+import {Router} from "@angular/router";
+import SpyObj = jasmine.SpyObj;
 
 
 describe('MovieService', () => {
   let httpClientSpy : jasmine.SpyObj<HttpClient>;
+  let routerSpy : SpyObj<Router>;
   let service: MovieService;
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj<HttpClient>(['get']);
+    routerSpy =  jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       providers: [
+        {provide: Router, useValue: routerSpy},
         {provide: HttpClient, useValue: httpClientSpy}
       ]
     });
