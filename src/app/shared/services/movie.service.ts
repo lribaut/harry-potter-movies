@@ -18,7 +18,10 @@ export class MovieService {
 
   private readonly http: HttpClient = inject(HttpClient);
 
-  private readonly router: Router = inject(Router)
+  //private readonly router: Router = inject(Router)
+
+  constructor(private readonly router :Router) {
+  }
 
   /**
    * Methode to search all Harry Potter Movies
@@ -38,9 +41,9 @@ export class MovieService {
             )
           )
         ),
-        catchError(() => {
+        catchError((erreur) => {
           alert("Movies not found");
-          console.error("Movies not found");
+          console.error(erreur);
           return EMPTY;
         })
       );
@@ -87,9 +90,9 @@ export class MovieService {
           summary: movieApi.summary
         })
       ),
-      catchError(() => {
+      catchError((erreur) => {
         alert("Movie not found");
-        console.error("Movie not found");
+        console.error(erreur);
         this.router.navigate(['/movies']);
         return EMPTY;
       })
