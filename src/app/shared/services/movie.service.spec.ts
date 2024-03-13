@@ -8,12 +8,10 @@ import {MovieDetails} from "../../page/movie-details-page/movie-details";
 import {computed, signal, WritableSignal} from "@angular/core";
 import {MovieService} from "./movie.service";
 import {Router} from "@angular/router";
-import SpyObj = jasmine.SpyObj;
-
 
 describe('MovieService', () => {
   let httpClientSpy : jasmine.SpyObj<HttpClient>;
-  let routerSpy : SpyObj<Router>;
+  let routerSpy : jasmine.SpyObj<Router>;
   let service: MovieService;
 
   beforeEach(() => {
@@ -113,7 +111,6 @@ describe('MovieService', () => {
           "summary": "The third movie in the Fantastic Beast Series sees Grindelwald trying to destroy the muggle world as Newt and his allies including Dumbledore try to stop him. Grindelwald kills a Qilin, a magical beast, to become the Supreme Leader of the ICW. Credence rethinks his decision to join Grindelwald upon realizing that he is the illegitimate son of Aberforth Dumbledore. The epic showdown takes place in Bhutan, where Dumbledore and Grindelwald fight it out after the blood pact that prevented them from dueling breaks. Grindelwald disapparates from the place and his plans are put to end."
         }
       ]
-
 
       const expectedMovie: Movie[] = [];
       movieApi.forEach(movieApi =>
