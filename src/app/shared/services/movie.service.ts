@@ -18,10 +18,7 @@ export class MovieService {
 
   private readonly http: HttpClient = inject(HttpClient);
 
-  //private readonly router: Router = inject(Router)
-
-  constructor(private readonly router :Router) {
-  }
+  private readonly router: Router = inject(Router);
 
   /**
    * Methode to search all Harry Potter Movies
